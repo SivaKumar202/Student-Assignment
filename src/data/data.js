@@ -47,8 +47,13 @@ export let assignments = [
     description:
       "Design a landing page that adapts seamlessly across devices using Tailwind CSS.",
     dueDate: "2025-11-04",
+    status: "Overdue",
     driveLink: "https://drive.google.com/example2",
     createdBy: 4,
+    actionLabel: "Submit Now",
+    statusColor: "text-red-600",
+    progressColor: "bg-orange-500",
+    buttonColor: "bg-blue-600 hover:bg-blue-700",
   },
   {
     id: 103,
@@ -58,6 +63,11 @@ export let assignments = [
     dueDate: "2025-11-06",
     driveLink: "https://drive.google.com/example3",
     createdBy: 4,
+    status: "Overdue",
+    actionLabel: "Submit Now",
+    statusColor: "text-red-600",
+    progressColor: "bg-orange-500",
+    buttonColor: "bg-blue-600 hover:bg-blue-700",
   },
 ];
 

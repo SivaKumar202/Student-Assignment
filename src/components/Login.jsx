@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setUser } from "../Redux/userSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function LoginForm() {
   const [role, setRole] = useState("student");
@@ -12,8 +11,14 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+  localStorage.setItem('role', JSON.stringify(role));
+}, [role]);
+useEffect(() => {
+  localStorage.setItem('identifier', JSON.stringify(identifier));
+}, [identifier]);
+
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const canSubmit = identifier.trim().length > 0 && password.length > 0;
 
@@ -28,18 +33,19 @@ export default function LoginForm() {
 
     setLoading(true);
 
-    dispatch(setUser({ role, identifier }));
-
     setTimeout(() => {
       setLoading(false);
-      console.log("Simulated login:", { role, identifier });
-      alert(`Logged in as ${role} — ${identifier}`);
+      toast(`Logged in as ${role} — ${identifier}`);
 
       if (role === "student") {
-        navigate("/studentDashboard");
+        setTimeout(() => {
+          navigate("/studentDashboard");
+        }, 2000);
       }
       if (role === "admin") {
-        navigate("/AdminDashboard");
+        setTimeout(() => {
+          navigate("/AdminDashboard");
+        }, 2000);
       }
     }, 800);
   }
@@ -184,6 +190,7 @@ export default function LoginForm() {
             >
               {loading ? "Logging in..." : "Login"}
             </button>
+            <ToastContainer />
           </div>
 
           {/* bottom hint */}
